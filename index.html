@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fast Mover Watch — Daily Pre-Market Signal Subscription | EAB Paper-Trading Desk</title>
+<meta name="description" content="Subscribe to the Fast Mover Watch: a daily paper-trading educational signal service. Pre-market momentum watchlist, entry/alert/cutoff/target levels, 10AM discipline, and paper ledger. Educational use only. From $79/month." />
+<!-- Open Graph -->
+<meta property="og:title" content="Fast Mover Watch — Daily Signal Subscription" />
+<meta property="og:description" content="Daily educational paper-trading watchlist: pre-market momentum setups, full levels, 10AM hard-exit discipline. Paper-only. From $79/mo." />
+<meta property="og:type" content="website" />
+<!-- Structured data: subscription service (educational) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Fast Mover Watch — Daily Signal Subscription",
+  "description": "A daily educational paper-trading signal service delivering pre-market momentum watchlists, illustrative entry/alert/cutoff/target levels, 10AM exit discipline, and paper ledger updates. Educational and simulation use only.",
+  "provider": { "@type": "Organization", "name": "EAB Paper-Trading Desk" },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Monthly",
+      "price": "79.00",
+      "priceCurrency": "USD",
+      "billingIncrement": "P1M",
+      "category": "Educational subscription"
+    },
+    {
+      "@type": "Offer",
+      "name": "Quarterly",
+      "price": "199.00",
+      "priceCurrency": "USD",
+      "billingIncrement": "P3M",
+      "category": "Educational subscription"
+    },
+    {
+      "@type": "Offer",
+      "name": "Annual",
+      "price": "699.00",
+      "priceCurrency": "USD",
+      "billingIncrement": "P1Y",
+      "category": "Educational subscription"
+    }
+  ],
+  "disclaimer": "PAPER-TRADING / SIMULATION / EDUCATIONAL USE ONLY. Not financial advice. No income, earnings, or performance guarantees. All examples illustrative and not predictive. No live trading. No real brokerage."
+}
+</script>
+<style>
+  :root {
+    --ink: #0b1220;
+    --panel: #0e1728;
+    --panel2: #0c1420;
+    --text: #dce8df;
+    --muted: #8fa89a;
+    --green: #10b981;
+    --green-dim: #0d9467;
+    --green-glow: rgba(16,185,129,.18);
+    --mint: #9fe6b4;
+    --line: #1a2e22;
+    --warn: #ffd27a;
+    --red: #ff5c72;
+    --gold: #ffd27a;
+    --radius: 16px;
+    --max: 980px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: radial-gradient(110% 90% at 60% 0%, #0d1e30 0%, var(--ink) 45%, #07090f 100%) fixed;
+    color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h1, h2, h3 { line-height: 1.2; letter-spacing: -.02em; margin: 0 0 .5em; }
+  h1 { font-size: clamp(28px, 5vw, 50px); font-weight: 800; }
+  h2 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 750; margin-top: 0; }
+  h3 { font-size: 18px; font-weight: 700; }
+  p.sub { font-size: clamp(16px, 2vw, 19px); color: var(--muted); max-width: 720px; }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: .18em; font-size: 11px;
+    color: var(--green); font-weight: 700; margin-bottom: 12px;
+  }
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: none; }
+
+  /* ── Draft banner ── */
+  .draft-banner {
+    background: #1a1206; border: 1px solid #3a2a08;
+    color: var(--warn); font-size: 13px; text-align: center; padding: 8px 16px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 80px 0 64px;
+    background:
+      radial-gradient(800px 400px at 85% -5%, rgba(16,185,129,.14), transparent 60%),
+      radial-gradient(600px 320px at 0% 10%, rgba(16,185,129,.09), transparent 55%);
+  }
+  .grad {
+    background: linear-gradient(90deg, var(--green), var(--mint));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* ── CTA button ── */
+  .cta {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--green), var(--green-dim));
+    color: #04120a; font-weight: 800; padding: 16px 32px;
+    border-radius: 999px; font-size: 17px; margin: 10px 0;
+    border: 0; cursor: pointer;
+    box-shadow: 0 8px 28px rgba(16,185,129,.28);
+    transition: transform .12s ease, box-shadow .12s ease;
+    text-decoration: none;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(16,185,129,.38); text-decoration: none; }
+  .cta.secondary {
+    background: transparent; color: var(--green);
+    border: 1.5px solid var(--green); box-shadow: none;
+  }
+  .cta.secondary:hover { background: var(--green-glow); }
+
+  /* ── Pills ── */
+  .pill {
+    display: inline-block; background: var(--panel); border: 1px solid var(--line);
+    color: var(--muted); padding: 5px 13px; border-radius: 999px;
+    font-size: 12px; margin: 4px 5px 4px 0; letter-spacing: .04em;
+  }
+
+  /* ── Pricing cards ── */
+  .pricing-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-top: 28px;
+  }
+  .price-card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px 24px; position: relative;
+  }
+  .price-card.featured {
+    border-color: var(--green);
+    box-shadow: 0 0 0 1px var(--green), 0 8px 32px rgba(16,185,129,.18);
+  }
+  .price-card .badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--green); color: #04120a; font-size: 10px; font-weight: 800;
+    letter-spacing: .1em; padding: 3px 14px; border-radius: 999px;
+    text-transform: uppercase;
+  }
+  .price-card .tier-name {
+    font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 8px;
+  }
+  .price-card .amount {
+    font-size: 42px; font-weight: 800; color: var(--text); line-height: 1;
+  }
+  .price-card .amount span { font-size: 18px; color: var(--muted); font-weight: 400; }
+  .price-card .save-tag {
+    font-size: 11px; color: var(--green); font-weight: 700;
+    letter-spacing: .08em; margin: 8px 0 16px;
+  }
+  .price-card p { font-size: 13px; color: var(--muted); margin: 0 0 20px; line-height: 1.6; }
+  .price-card .cta { width: 100%; text-align: center; font-size: 15px; padding: 13px 20px; }
+
+  /* ── Feature grid ── */
+  .grid { display: grid; gap: 14px; }
+  .cols-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 22px;
+  }
+  .card .n { font-size: 11px; color: var(--green); font-weight: 700; letter-spacing: .1em; margin-bottom: 6px; }
+
+  /* ── Teaser box (free preview) ── */
+  .teaser-box {
+    background: linear-gradient(135deg, rgba(16,185,129,.09), rgba(16,185,129,.04));
+    border: 1px solid rgba(16,185,129,.35);
+    border-radius: var(--radius); padding: 28px 30px; margin-top: 24px;
+  }
+  .teaser-box .label {
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--green); font-weight: 700; margin-bottom: 10px;
+  }
+  .levels-mini {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px; margin: 14px 0;
+  }
+  .level-chip {
+    background: rgba(9,20,13,.70); border: 1px solid var(--line);
+    border-radius: 10px; padding: 10px 13px;
+  }
+  .level-chip .lc-label { font-size: 9px; letter-spacing: .15em; color: var(--muted); text-transform: uppercase; }
+  .level-chip .lc-val { font-size: 13px; font-weight: 800; color: var(--green); margin-top: 4px; }
+  .level-chip.cutoff .lc-val { color: var(--red); }
+  .level-chip.target .lc-val { color: var(--gold); }
+
+  /* ── Check list ── */
+  ul.clean { list-style: none; padding: 0; margin: 0; }
+  ul.clean li { padding: 7px 0 7px 28px; position: relative; font-size: 15px; }
+  ul.clean li::before {
+    content: ""; position: absolute; left: 0; top: 14px;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--mint));
+  }
+
+  /* ── Disclaimer ── */
+  .disclaimer {
+    background: var(--panel2); border: 1px solid var(--line);
+    border-left: 3px solid var(--warn);
+    border-radius: 10px; padding: 14px 18px; color: var(--muted); font-size: 13px;
+    line-height: 1.7;
+  }
+  .disc-full {
+    background: rgba(255,92,114,.06); border: 1px solid rgba(255,92,114,.25);
+    border-radius: 12px; padding: 18px 22px;
+    font-size: 12px; color: #e8c4ca; line-height: 1.8;
+  }
+  .disc-full b { color: var(--red); }
+
+  /* ── FAQ ── */
+  details {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 4px 20px; margin: 8px 0;
+  }
+  details summary { cursor: pointer; font-weight: 650; padding: 14px 0; list-style: none; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] summary { color: var(--green); }
+  details p { color: var(--muted); font-size: 14px; margin-bottom: 14px; }
+
+  /* ── Two-col ── */
+  .two { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+  /* ── Muted text ── */
+  .muted { color: var(--muted); }
+  .center { text-align: center; }
+
+  /* ── 10AM discipline callout ── */
+  .discipline-box {
+    background: rgba(255,92,114,.06); border: 1px solid rgba(255,92,114,.25);
+    border-radius: 12px; padding: 20px 24px; margin: 20px 0;
+  }
+  .discipline-box b { color: var(--red); }
+
+  /* ── Risk rule callout ── */
+  .risk-box {
+    background: rgba(255,210,122,.06); border: 1px solid rgba(255,210,122,.22);
+    border-radius: 12px; padding: 20px 24px; margin: 20px 0;
+  }
+  .risk-box b { color: var(--gold); }
+
+  /* ── Footer ── */
+  footer { padding: 44px 0; color: var(--muted); font-size: 13px; text-align: center; }
+  footer p { margin: 4px 0; }
+</style>
+</head>
+<body>
+
+<!-- ── Draft banner: visible until BUY_URL is set + DRAFT = false ── -->
+<div class="draft-banner" id="draftBanner">
+  DRAFT / NOT LIVE — subscription is not connected and nothing is for sale yet. See storefront/README.md to go live.
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">EAB Paper-Trading Desk · Educational Signal Service</div>
+    <h1>The <span class="grad">Fast Mover Watch</span> — delivered daily, before the market opens.</h1>
+    <p class="sub">
+      Pre-market momentum candidates. Entry zone. Alert price. Hard cutoff. Quick target.
+      10AM exit discipline. Paper ledger. Every market day — for students of early-momentum
+      simulation and paper trading.
+    </p>
+    <p>
+      <button class="cta" data-buy>Subscribe — From $79/Month &rarr;</button>
+    </p>
+    <div>
+      <span class="pill">Paper-trading / simulation only</span>
+      <span class="pill">Educational · not financial advice</span>
+      <span class="pill">No income guarantees</span>
+      <span class="pill">Delivered daily</span>
+    </div>
+    <div class="disclaimer" style="margin-top: 20px; max-width: 720px;">
+      <strong style="color: var(--warn);">Important:</strong>
+      This is a paper-trading / simulation / educational service only. It is NOT financial advice
+      and does NOT constitute a recommendation to buy or sell any security. No income, earnings,
+      or performance guarantees are made. All examples are illustrative and not predictive.
+      No live trading. No real brokerage.
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FREE TEASER — what the free preview shows
+═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Free Preview</div>
+    <h2>What the daily watch looks like</h2>
+    <p class="sub">
+      Each day, EAB's paper-trading committee flags early-momentum candidates — tickers showing
+      "massive early momentum" pre-10AM. Free subscribers see the ticker and direction.
+      Paid members get the full picture.
+    </p>
+
+    <!-- Illustrative teaser card -->
+    <div class="teaser-box">
+      <div class="label">Sample Watch Entry — Illustrative / Educational Only</div>
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px; flex-wrap:wrap;">
+        <span style="font-size:32px; font-weight:900; letter-spacing:2px;">$TICKER</span>
+        <span style="background:var(--green); color:#04120a; font-size:10px; font-weight:800;
+              padding:3px 12px; border-radius:20px; letter-spacing:1px;">BUY SIDE</span>
+        <span style="font-size:12px; color:var(--muted);">Pre-market · Early momentum signal</span>
+      </div>
+      <p style="font-size:13px; color:var(--muted); margin:0 0 16px;">
+        Early momentum flagged by the paper committee. Candidate may not meet the strict
+        "Confirmed Buy" all-day hold criteria — this is a fast, pre-10AM setup only.
+      </p>
+      <div class="levels-mini">
+        <div class="level-chip">
+          <div class="lc-label">Entry Level</div>
+          <div class="lc-val">Paid members</div>
+        </div>
+        <div class="level-chip">
+          <div class="lc-label">Alert Price</div>
+          <div class="lc-val">Paid members</div>
+        </div>
+        <div class="level-chip cutoff">
+          <div class="lc-label">Do Not Buy After</div>
+          <div class="lc-val">Paid members</div>
+        </div>
+        <div class="level-chip target">
+          <div class="lc-label">Quick Target</div>
+          <div class="lc-val">Paid members</div>
+        </div>
+      </div>
+      <p style="font-size:11px; color:var(--muted); margin:10px 0 0; font-style:italic;">
+        All levels shown to paid members are ILLUSTRATIVE — derived from paper-committee
+        confidence scores, not real intraday quotes or analyst price targets.
+        Paper / educational use only. Not a recommendation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHAT PAID MEMBERS GET
+═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Paid Membership</div>
+    <h2>What you get every market day</h2>
+    <p class="sub">
+      Full Fast Mover Watch delivered daily — professionally branded, dark-themed,
+      designed for fast scanning. Everything the paper-trading methodology covers.
+    </p>
+
+    <div class="grid cols-2" style="margin-top: 24px;">
+      <div class="card">
+        <div class="n">WATCHLIST</div>
+        <h3>Full Pre-Market Momentum Candidates</h3>
+        <p class="muted">All tickers flagged for early momentum (pre-10AM only; may not meet
+        strict Confirmed Buy criteria). Per-ticker: entry zone, alert price, hard cutoff,
+        quick target area. Adjusts with 1-min momentum.</p>
+      </div>
+      <div class="card">
+        <div class="n">DISCIPLINE</div>
+        <h3>10AM Hard-Exit Rule — Every Day</h3>
+        <p class="muted">The core discipline: <strong style="color:var(--text);">you MUST
+        sell by 10AM.</strong> Fast movers don't meet all-day hold criteria.
+        Daily reminder keeps the paper-trading methodology clean. Track Price at 10,
+        High by 10, Profit/share, % max, STATUS.</p>
+      </div>
+      <div class="card">
+        <div class="n">RISK GUIDE</div>
+        <h3>Simple Risk Rule, Reinforced Daily</h3>
+        <p class="muted">Only risk approximately <strong style="color:var(--text);">$0.25–$0.50
+        per share</strong> on any Fast Mover Watch setup. High-velocity, pre-10AM plays —
+        position-size accordingly. The rule is educational guidance only.</p>
+      </div>
+      <div class="card">
+        <div class="n">ANALYST BREAKDOWN</div>
+        <h3>Per-Analyst Signal Cards</h3>
+        <p class="muted">See which committee agents flagged each ticker and their confidence
+        level — bullish, neutral, bearish. Methodology transparency for educational context.</p>
+      </div>
+      <div class="card">
+        <div class="n">PAPER LEDGER</div>
+        <h3>Daily Gate Results</h3>
+        <p class="muted">Watch rows · Confirmed Buys · Not Actionable · Approved paper count.
+        Mirrors the original KamdenAI ledger structure — but these are EAB's real paper-gate
+        counts. Simulation only. No live money, no real broker.</p>
+      </div>
+      <div class="card">
+        <div class="n">TIMING NOTES</div>
+        <h3>Upcoming Confirmation Cards</h3>
+        <p class="muted">9:33 PLAN, 9:45 opening confirmation, momentum progression notes.
+        Helps paper traders follow the pre-10AM window discipline in real time during
+        educational simulation sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     METHODOLOGY CALLOUTS
+═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The Methodology</div>
+    <h2>Pre-10AM momentum — with hard exits</h2>
+
+    <div class="discipline-box">
+      <b>10AM HARD-EXIT RULE (mandatory in the methodology):</b>
+      <p style="margin: 10px 0 0; font-size: 14px; color: var(--muted);">
+        "You jump in quickly at the open and you MUST sell by 10AM." Fast Mover Watch
+        setups are specifically pre-market / early-open plays. Most fast movers
+        <em>do not meet</em> the stricter "Confirmed Buy" all-day hold criteria.
+        The hard exit protects capital from the momentum fade that typically follows 10AM.
+        This is a paper-trading discipline — not live-trading advice.
+      </p>
+    </div>
+
+    <div class="risk-box">
+      <b>SIMPLE RISK RULE:</b>
+      <p style="margin: 10px 0 0; font-size: 14px; color: var(--muted);">
+        Only risk approximately <b>$0.25–$0.50 per share</b> on any Fast Mover Watch setup.
+        This is the paper-desk's position-sizing guideline for simulation purposes.
+        It is educational guidance only — not a recommendation. Apply your own capital
+        management rules. No guarantee of any outcome is made or implied.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PRICING
+═══════════════════════════════════════════════════════════════ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="eyebrow center">Subscription Tiers</div>
+    <h2 class="center">Choose your membership</h2>
+    <p class="sub center" style="margin: 0 auto 8px;">
+      All tiers deliver the same daily Fast Mover Watch content.
+      Quarterly and annual save you money for the same educational value.
+    </p>
+    <p class="center" style="font-size: 12px; color: var(--muted); margin-bottom: 0;">
+      Paper-trading / educational only &mdash; no income guarantees &mdash; not financial advice.
+    </p>
+
+    <div class="pricing-grid">
+
+      <!-- Monthly -->
+      <div class="price-card">
+        <div class="tier-name">Monthly</div>
+        <div class="amount">$79<span>/mo</span></div>
+        <div class="save-tag">&nbsp;</div>
+        <p>Full daily Fast Mover Watch. Cancel any time. Billed monthly.</p>
+        <button class="cta" data-buy data-tier="monthly">
+          Subscribe Monthly &rarr;
+        </button>
+      </div>
+
+      <!-- Quarterly — featured -->
+      <div class="price-card featured">
+        <div class="badge">Best Value</div>
+        <div class="tier-name">Quarterly</div>
+        <div class="amount">$199<span>/qtr</span></div>
+        <div class="save-tag">Save ~16% vs monthly</div>
+        <p>Full daily Fast Mover Watch. 3 months, one charge. Renews quarterly.</p>
+        <button class="cta" data-buy data-tier="quarterly">
+          Subscribe Quarterly &rarr;
+        </button>
+      </div>
+
+      <!-- Annual -->
+      <div class="price-card">
+        <div class="tier-name">Annual</div>
+        <div class="amount">$699<span>/yr</span></div>
+        <div class="save-tag">Save ~26% vs monthly</div>
+        <p>Full daily Fast Mover Watch. Best rate. One annual charge. Renews yearly.</p>
+        <button class="cta" data-buy data-tier="annual">
+          Subscribe Annually &rarr;
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Claim-safety note under pricing -->
+    <div class="disclaimer" style="margin-top: 28px; max-width: 880px; margin-left: auto; margin-right: auto;">
+      <strong style="color: var(--warn);">Claim-safety disclosure (required reading before subscribing):</strong>
+      This subscription is for an educational paper-trading / simulation signal service only.
+      You are paying for educational content — daily watchlist, illustrative levels, methodology
+      explanations, and paper ledger updates.
+      <strong>No income, earnings, profit, or performance guarantees are made.</strong>
+      Past paper-trade results (e.g., illustrative examples) are not indicative of future results
+      and do not constitute a promise or projection of returns.
+      No live trading is involved. No real brokerage. No real money is moved on your behalf.
+      This service is a learning tool for momentum and paper-trading concepts only.
+      Users are solely responsible for their own investment and risk decisions.
+      If you apply any methodology from this service to real trading, you do so entirely at your own risk.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHO IT'S FOR / NOT FOR
+═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap two">
+    <div>
+      <h2>Who it's for</h2>
+      <ul class="clean">
+        <li>Paper traders studying early-morning momentum setups.</li>
+        <li>Students of the KamdenAI / hybrid swing signal methodology.</li>
+        <li>Learners who want a structured daily watchlist for simulation practice.</li>
+        <li>Anyone who wants to track the 10AM discipline and paper-ledger methodology in real time.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Who it's <em>not</em> for</h2>
+      <ul class="clean">
+        <li>Anyone expecting live trade signals or real brokerage recommendations. This service does not provide those.</li>
+        <li>Anyone expecting guaranteed profits or income. No such guarantee exists or is implied.</li>
+        <li>Anyone who won't read the disclaimer above before applying any concept to real capital.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <h2>Questions</h2>
+
+    <details>
+      <summary>Is this financial advice or live trading signals?</summary>
+      <p>No. This is a paper-trading / simulation / educational service only. All watchlist entries,
+      illustrative levels, and ledger data are produced by EAB's paper-trading committee for
+      educational purposes. Nothing here constitutes a recommendation to buy, sell, or hold any
+      security. No live trading is involved.</p>
+    </details>
+
+    <details>
+      <summary>Are the price levels (entry, alert, cutoff, target) real quotes?</summary>
+      <p>No. All levels shown are ILLUSTRATIVE — derived from the paper committee's confidence scores.
+      They are not real intraday quotes, not analyst price targets, and not broker recommendations.
+      Always verify live quotes independently before any paper-simulation session.</p>
+    </details>
+
+    <details>
+      <summary>Do you guarantee I'll make money?</summary>
+      <p>No income, earnings, profit, or performance guarantees are made or implied. Past illustrative
+      examples (e.g., historical paper-trade results) are not indicative of future results. Anyone
+      who guarantees trading profits is lying to you. We don't do that.</p>
+    </details>
+
+    <details>
+      <summary>How is the daily digest delivered?</summary>
+      <p>Delivery MVP is email: the daily paid digest (paid.md / paid.html) is emailed to members
+      each market morning. The free preview (free.html) is posted publicly. Access and delivery
+      details are confirmed at sign-up.</p>
+    </details>
+
+    <details>
+      <summary>What is the 10AM rule?</summary>
+      <p>A core paper-desk discipline: Fast Mover Watch setups are pre-10AM only. The rule is to
+      exit all positions by 10AM to protect paper-trade capital from the momentum fade that
+      typically follows. This is a paper-trading methodology concept — not live trading advice.</p>
+    </details>
+
+    <details>
+      <summary>Can I cancel?</summary>
+      <p>Yes. Monthly members can cancel before their next billing date. Quarterly and annual
+      members follow the standard Gumroad membership cancellation policy (you keep access
+      through your paid period). Nothing auto-charges until you subscribe.</p>
+    </details>
+
+    <details>
+      <summary>What is "paper trading"?</summary>
+      <p>Paper trading (also called simulation trading) means tracking hypothetical trades without
+      using real money. It's a standard educational technique for learning market mechanics and
+      testing strategies risk-free. This service is strictly for paper / simulation use only.
+      No real capital is moved on your behalf.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BOTTOM CTA
+═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">Get Started</div>
+    <h2>Fast Mover Watch — Daily Signal Subscription</h2>
+    <p class="sub" style="margin: 0 auto 20px;">
+      Daily watchlist · Full levels · 10AM discipline · Paper ledger · Per-analyst breakdown.
+      Educational momentum study — delivered every market morning.
+    </p>
+    <button class="cta" data-buy>Subscribe — From $79/Month &rarr;</button>
+    <p style="font-size: 12px; color: var(--muted); margin-top: 14px;">
+      $79/mo &nbsp;&middot;&nbsp; $199/qtr (save 16%) &nbsp;&middot;&nbsp; $699/yr (save 26%)
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FULL DISCLAIMER (footer)
+═══════════════════════════════════════════════════════════════ -->
+<section style="padding: 40px 0;">
+  <div class="wrap">
+    <div class="disc-full">
+      <b>FULL DISCLAIMER — READ BEFORE SUBSCRIBING</b><br><br>
+      The Fast Mover Watch is produced by EAB's paper-trading desk and is strictly for
+      <b>EDUCATIONAL / SIMULATION use only</b>. It is NOT financial advice and does NOT
+      constitute a recommendation to buy, sell, or hold any security.
+      All ticker levels (ENTRY, ALERT, DO NOT BUY AFTER, QUICK TARGET) are
+      <b>ILLUSTRATIVE</b> and derived from paper-trading committee data — they are NOT
+      real intraday quotes, analyst price targets, or broker recommendations.
+      Past paper-trade results are not indicative of future results.
+      EAB makes <b>NO income, earnings, profit, or performance guarantees</b> of any kind.
+      No live trading, no real brokerage, no real money is involved in this service.
+      Users are solely responsible for their own investment decisions and risk management.
+      Apply your own capital management rules at all times.
+      This is a learning tool for momentum and paper-trading concepts only.
+      If you choose to apply any concept from this service to real trading, you do so
+      entirely at your own risk, with no warranty, representation, or guarantee from EAB.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; <span id="yr">2026</span> EAB Paper-Trading Desk. Educational product.</p>
+    <p>Not financial advice. Paper-trading / simulation / educational use only.</p>
+    <p>No income, earnings, or performance guarantees. No live trading. No real brokerage.</p>
+  </div>
+</footer>
+
+<script>
+  // ── Esteban: WIRE SUBSCRIPTION HERE ──────────────────────────────────────────
+  // 1. Create a Gumroad Membership product (see storefront/README.md for steps).
+  // 2. Paste the membership URL below (e.g. "https://egirald.gumroad.com/l/XXXX").
+  // 3. Set DRAFT = false to remove the draft banner.
+  // Nothing charges or subscribes anyone until BUY_URL is set.
+  const BUY_URL = "https://egirald.gumroad.com/l/fast-mover-watch"; // LIVE Gumroad membership
+  const DRAFT   = false; // LIVE (Esteban published 2026-06-15)
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  if (!DRAFT) {
+    const b = document.getElementById("draftBanner");
+    if (b) b.remove();
+  }
+
+  document.querySelectorAll("[data-buy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (BUY_URL) {
+        window.location.href = BUY_URL;
+      } else {
+        alert(
+          "Subscription is not connected yet.\n\n" +
+          "Set BUY_URL in index.html to your Gumroad membership URL.\n" +
+          "See storefront/README.md for the full go-live checklist."
+        );
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
