@@ -1,0 +1,5 @@
+# Fast Mover Watch — robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://egiraldmu1795.github.io/fast-mover-watch/sitemap.xml
